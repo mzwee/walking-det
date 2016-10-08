@@ -64,6 +64,50 @@
                 },
                 "deprecated": false
             }
+        },
+        "/scoreupdate": {
+            "post": {
+                "summary": "Updates street safety score",
+                "description": "Get the original safety score of a street and calculate the average with new input.",
+                "parameters": [
+                    {
+                        "name": "scoredata",
+                        "in": "body",
+                        "schema": {
+                            "required": [
+                                "lat1",
+                                "lon1",
+                                "lat2",
+                                "lon2",
+                                "score"
+                            ],
+                            "properties": {
+                                "lat1": {
+                                    "type": "string"
+                                },
+                                "lon1": {
+                                    "type": "string"
+                                },
+                                "lat2": {
+                                    "type": "string"
+                                },
+                                "lon2": {
+                                    "type": "string"
+                                },
+                                "score": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
         }
     },
     "definitions": {
