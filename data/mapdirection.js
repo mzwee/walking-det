@@ -1,16 +1,16 @@
 'use strict';
-var Mockgen = require('../mockgen.js');
+var Mockgen = require('./mockgen.js');
 /**
- * Operations on /map-direction/&amp;{origin_in}&amp;{destination_in}
+ * Operations on /mapdirection
  */
 module.exports = {
     /**
      * summary: 
      * description: 
-     * parameters: origin_in, destination_in
+     * parameters: 
      * produces: application/json, text/json
      * responses: 200
-     * operationId: map_direction_get
+     * operationId: mapdirection_get
      */
     get: {
         200: function (req, res, callback) {
@@ -19,7 +19,7 @@ module.exports = {
              * Replace this by actual data for the api.
              */
             Mockgen().responses({
-                path: '/map-direction/&amp;{origin_in}&amp;{destination_in}',
+                path: '/mapdirection',
                 operation: 'get',
                 response: '200'
             }, callback);

@@ -55,31 +55,18 @@
 				"deprecated": false
 			}
 		},
-		"/map-direction/&{origin_in}&{destination_in}": {
+		"/mapdirection": {
 			"get": {
 				"tags": ["MapDirection"],
-				"operationId": "map_direction_get",
+				"operationId": "mapdirection_get",
 				"consumes": [],
 				"produces": ["application/json",
 				"text/json"],
-				"parameters": [
-					{
-						"name": "origin_in",
-						"in": "path",
-						"required": true,
-						"type": "string",
-					},
-					{
-						"name": "destination_in",
-						"in": "path",
-						"required": true,
-						"type": "string",
-					}
-				],
 				"responses": {
 					"200": {
 						"description": "OK",
 						"schema": {
+							"type": "array",
 							"items": {
 								"$ref": "#/definitions/MapDirection"
 							}
@@ -88,7 +75,35 @@
 				},
 				"deprecated": false
 			}
-		}
+		},
+		"/mapdirection/{id}": {
+			"get": {
+				"tags": ["MapDirection"],
+				"operationId": "mapdirection_getByID",
+				"consumes": [],
+				"produces": ["application/json",
+				"text/json"],
+				"parameters": [{
+					"name": "id",
+					"in": "path",
+					"required": true,
+					"type": "integer",
+					"format": "int32"
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/MapDirection"
+							}
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
 	},
 	"definitions": {
 		"Contact": {
@@ -109,25 +124,15 @@
 		"MapDirection": {
 			"type": "object",
 			"properties": {
-				"origin_in":{
-					"type": "string",
+				"id": {
+					"format": "int32",
+					"type": "integer"
 				},
-				"destination_in" : {
-					"type": "string",
+				"name": {
+					"type": "string"
 				},
-				"steps": {
-					"type": [{
-						"distance": "string",
-						"duration": "string",
-						"end_location":{
-							"lat": "string",
-							"lng": "string"
-						},
-						"start_location" : "string",
-						"instruction":"string",
-						"origin": "origin_in",
-						"destination": "destination_in"
-					}],
+				"email": {
+					"type": "string"
 				}
 			}
 		}

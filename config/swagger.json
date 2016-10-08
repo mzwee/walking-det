@@ -65,12 +65,37 @@
                 "deprecated": false
             }
         },
-        "/map-direction/&{origin_in}&{destination_in}": {
+        "/mapdirection": {
             "get": {
                 "tags": [
                     "MapDirection"
                 ],
-                "operationId": "map_direction_get",
+                "operationId": "mapdirection_get",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/MapDirection"
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/mapdirection/{id}": {
+            "get": {
+                "tags": [
+                    "MapDirection"
+                ],
+                "operationId": "mapdirection_getByID",
                 "consumes": [],
                 "produces": [
                     "application/json",
@@ -78,22 +103,18 @@
                 ],
                 "parameters": [
                     {
-                        "name": "origin_in",
+                        "name": "id",
                         "in": "path",
                         "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "destination_in",
-                        "in": "path",
-                        "required": true,
-                        "type": "string"
+                        "type": "integer",
+                        "format": "int32"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
+                            "type": "array",
                             "items": {
                                 "$ref": "#/definitions/MapDirection"
                             }
@@ -123,10 +144,14 @@
         "MapDirection": {
             "type": "object",
             "properties": {
-                "origin_in": {
+                "id": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "name": {
                     "type": "string"
                 },
-                "destination_in": {
+                "email": {
                     "type": "string"
                 }
             }
