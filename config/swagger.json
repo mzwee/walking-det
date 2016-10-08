@@ -64,6 +64,44 @@
                 },
                 "deprecated": false
             }
+        },
+        "/map-direction/&{origin_in}&{destination_in}": {
+            "get": {
+                "tags": [
+                    "MapDirection"
+                ],
+                "operationId": "map_direction_get",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "text/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "origin_in",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "destination_in",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/MapDirection"
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
         }
     },
     "definitions": {
@@ -78,6 +116,17 @@
                     "type": "string"
                 },
                 "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "MapDirection": {
+            "type": "object",
+            "properties": {
+                "origin_in": {
+                    "type": "string"
+                },
+                "destination_in": {
                     "type": "string"
                 }
             }

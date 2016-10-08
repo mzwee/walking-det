@@ -1,17 +1,17 @@
 'use strict';
-var dataProvider = require('../../data/contacts/{id}.js');
+var dataProvider = require('../../data/map-direction/&amp;{origin_in}&amp;{destination_in}.js');
 /**
- * Operations on /contacts/{id}
+ * Operations on /map-direction/&amp;{origin_in}&amp;{destination_in}
  */
 module.exports = {
     /**
      * summary: 
      * description: 
-     * parameters: id
+     * parameters: origin_in, destination_in
      * produces: application/json, text/json
      * responses: 200
      */
-    get: function contacts_getById(req, res, next) {
+    get: function map_direction_get(req, res, next) {
         /**
          * Get the data for response 200
          * For response `default` status 200 is used.

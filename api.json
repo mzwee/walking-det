@@ -55,27 +55,33 @@
 				"deprecated": false
 			}
 		},
-		"/map-direction/": {
+		"/map-direction/&{origin_in}&{destination_in}": {
 			"get": {
-				"tags": ["Contacts"],
-				"operationId": "contacts_getById",
+				"tags": ["MapDirection"],
+				"operationId": "map_direction_get",
 				"consumes": [],
 				"produces": ["application/json",
 				"text/json"],
-				"parameters": [{
-					"name": "id",
-					"in": "path",
-					"required": true,
-					"type": "integer",
-					"format": "int32"
-				}],
+				"parameters": [
+					{
+						"name": "origin_in",
+						"in": "path",
+						"required": true,
+						"type": "string",
+					},
+					{
+						"name": "destination_in",
+						"in": "path",
+						"required": true,
+						"type": "string",
+					}
+				],
 				"responses": {
 					"200": {
 						"description": "OK",
 						"schema": {
-							"type": "array",
 							"items": {
-								"$ref": "#/definitions/Contact"
+								"$ref": "#/definitions/MapDirection"
 							}
 						}
 					}
@@ -97,6 +103,31 @@
 				},
 				"email": {
 					"type": "string"
+				}
+			}
+		},
+		"MapDirection": {
+			"type": "object",
+			"properties": {
+				"origin_in":{
+					"type": "string",
+				},
+				"destination_in" : {
+					"type": "string",
+				},
+				"steps": {
+					"type": [{
+						"distance": "string",
+						"duration": "string",
+						"end_location":{
+							"lat": "string",
+							"lng": "string"
+						},
+						"start_location" : "string",
+						"instruction":"string",
+						"origin": "origin_in",
+						"destination": "destination_in"
+					}],
 				}
 			}
 		}
