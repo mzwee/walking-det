@@ -32,7 +32,7 @@ App.post('/route', function(req, res) {
     var msg = req.body.Body.toLowerCase();
     var re = new RegExp("^from:(.+);.*to:(.+)$");
     var data = re.exec(msg);
-    if(data.length != 2) {
+    if(data.length != 3) {
         twiml.message("Invalid address. Please make sure you type the address correctly in this format: from:____;to:____");
     } else {
         twiml.message("We've received your request. We'll get back to you in 3 minutes");
