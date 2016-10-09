@@ -76,7 +76,7 @@
 				"deprecated": false
 			}
 		},
-		"/mapdirection/origin={origin}&destination={destination}": {
+		"/mapdirection/origin={origin}-destination={destination}": {
 			"get": {
 				"tags": ["MapDirection"],
 				"operationId": "mapdirections_get",

@@ -1,6 +1,5 @@
 'use strict';
 var dataProvider = require('../data/mapdirection.js');
-var Promise = require('promise');
 /**
  * Operations on /mapdirection
  */
@@ -12,34 +11,19 @@ module.exports = {
      * produces: application/json, text/json
      * responses: 200
      */
-    get: function mapdirection_get(req, rez, next) {
+    get: function mapdirection_get(req, res, next) {
         /**
          * Get the data for response 200
          * For response `default` status 200 is used.
          */
-
         var status = 200;
         var provider = dataProvider['get']['200'];
-        console.log(provider);
-        var promise = new Promise(function (resolve, reject) {
-        provider(req, rez, function (err, data) {
-            console.log(data);
+        provider(req, res, function (err, data) {
             if (err) {
-                reject(err);
+                next(err);
                 return;
             }
-                console.log(callback);
-                rez.status(status).send(data);
-                    resolve(res);
-                    return;
-                });
-            // return;
-            // console.log("WDYWWYWYWYWYYWYWYWWYYW" +data)
+            res.status(status).send(data && data.responses);
         });
-        // res.on('end', function () {
-            
-        //     return;
-        // });
-        // req.onres.status(status).send(data);
     }
 };

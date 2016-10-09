@@ -18,14 +18,11 @@ module.exports = {
          */
         var status = 200;
         var provider = dataProvider['get']['200'];
-        console.log(provider);
         provider(req, res, function (err, data) {
             if (err) {
                 next(err);
                 return;
             }
-            console.log(data);
-            console.log(data.responses);
             res.status(status).send(data && data.responses);
         });
     }

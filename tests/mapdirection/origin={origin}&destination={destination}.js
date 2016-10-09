@@ -5,13 +5,13 @@ var BodyParser = require('body-parser');
 var Swaggerize = require('swaggerize-express');
 var Path = require('path');
 var Request = require('supertest');
-var Mockgen = require('../data/mockgen.js');
+var Mockgen = require('../../data/mockgen.js');
 var Parser = require('swagger-parser');
 /**
- * Test for /mapdirection
+ * Test for /mapdirection/origin={origin}&amp;destination={destination}
  */
-Test('/mapdirection', function (t) {
-    var apiPath = Path.resolve(__dirname, '../config/swagger.json');
+Test('/mapdirection/origin={origin}&amp;destination={destination}', function (t) {
+    var apiPath = Path.resolve(__dirname, '../../config/swagger.json');
     var App = Express();
     App.use(BodyParser.json());
     App.use(BodyParser.urlencoded({
@@ -19,7 +19,7 @@ Test('/mapdirection', function (t) {
     }));
     App.use(Swaggerize({
         api: apiPath,
-        handlers: Path.resolve(__dirname, '../handlers')
+        handlers: Path.resolve(__dirname, '../../handlers')
     }));
     Parser.validate(apiPath, function (err, api) {
         t.error(err, 'No parse error');
@@ -27,13 +27,13 @@ Test('/mapdirection', function (t) {
         /**
          * summary: 
          * description: 
-         * parameters: 
+         * parameters: origin, destination
          * produces: application/json, text/json
          * responses: 200
          */
-        t.test('test mapdirection_get get operation', function (t) {
+        t.test('test mapdirections_get get operation', function (t) {
             Mockgen().requests({
-                path: '/mapdirection',
+                path: '/mapdirection/origin={origin}&amp;destination={destination}',
                 operation: 'get'
             }, function (err, mock) {
                 var request;
@@ -63,7 +63,7 @@ Test('/mapdirection', function (t) {
                     t.error(err, 'No error');
                     t.ok(res.statusCode === 200, 'Ok response status');
                     var Validator = require('is-my-json-valid');
-                    var validate = Validator(api.paths['/mapdirection']['get']['responses']['200']['schema']);
+                    var validate = Validator(api.paths['/mapdirection/origin={origin}&amp;destination={destination}']['get']['responses']['200']['schema']);
                     var response = res.body;
                     if (Object.keys(response).length <= 0) {
                         response = res.text;
