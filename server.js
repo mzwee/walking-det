@@ -29,12 +29,13 @@ App.use('/docs', swaggerUi({
 
 App.post('/route', function(req, res) {
     var twiml = new twilio.TwimlResponse();
-    if (req.body.Body == 'hello') {
-        twiml.message('Hi!');
-    } else if(req.body.Body == 'bye') {
-        twiml.message('Goodbye');
+    var msg = req.body.Body.toLowerCase();
+    var re = new RegExp("^from:(.+);.*to:(.+)$");
+    var data = re.exec(msg);
+    if(data.length != 2) {
+        twiml.message("Invalid address. Please make sure you type the address correctly in this format: from:____;to:____");
     } else {
-        twiml.message('No Body param match, Twilio sends this in the request to your server.');
+        twiml.message("We've received your request. We'll get back to you in 3 minutes");
     }
     res.writeHead(200, {'Content-Type': 'text/xml'});
     res.end(twiml.toString());
