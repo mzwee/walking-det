@@ -1,6 +1,5 @@
 'use strict';
 var https = require('https');
-var dataProvider = require('../../data/mapdirection/origin={origin}-destination={destination}.js');
 /**
  * Operations on /mapdirection/origin={origin}-destination={destination}
  */
@@ -11,23 +10,6 @@ function jsFriendlyJSONStringify (s) {
         replace(/\u2028/g, '\\u2028').
         replace(/\u2029/g, '\\u2029');
 }
-
-// var s = {
-//     a: String.fromCharCode(0x2028),
-//     b: String.fromCharCode(0x2029)
-// };
-// try {
-//     eval('(' + JSON.stringify(s) + ')');
-// } catch (e) {
-//     console.log(e); // "SyntaxError: unterminated string literal"
-// }
-
-// // No need for a catch
-// eval('(' + jsFriendlyJSONStringify(s) + ')');
-
-// console.log in Firefox unescapes the Unicode if
-//   logged to console, so we use alert
-// alert(jsFriendlyJSONStringify(s)); // {"a":"\u2028","b":"\u2029"}
 
 function processGmap(gmaps){
     // console.log("Arraging");

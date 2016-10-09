@@ -1,37 +1,56 @@
 'use strict';
-var dataProvider = require('../data/mapdirection.js');
-/**
- * Operations on /mapdirection
- */
-module.exports = {
-    /**
-     * summary: 
-     * description: 
-     * parameters: 
-     * produces: application/json, text/json
-     * responses: 200
-     */
-    get: function mapdirection_get(req, rez, next) {
+var https = require('https');
+function jsFriendlyJSONStringify (s) {
+    return JSON.stringify(s).
+        replace(/\u2028/g, '\\u2028').
+        replace(/\u2029/g, '\\u2029');
+}
+
+function processGmap(gmaps){
+    gmaps = eval('(' + jsFriendlyJSONStringify(gmaps) + ')');
+    console.log(gmaps);
+}
+
+// module.exports = {
+//     *
+//      * summary: 
+//      * description: 
+//      * parameters: origin, destination
+//      * produces: application/json, text/json
+//      * responses: 200
+     
+//     get: function mapdirections_get(req, res, next) {
         /**
          * Get the data for response 200
          * For response `default` status 200 is used.
          */
-        var status = 200;
-        var provider = dataProvider['get']['200'];
-        provider(req, res, function (err, data) {
-            console.log(data);
-            console.log(data.responses);
-            if (err) {
-                next(err);
-                return;
-            }
-            rez.status(status).send(data && data.statusCode);
-            // console.log("WDYWWYWYWYWYYWYWYWWYYW" +data)
-        });
-        // res.on('end', function () {
-            
-        //     return;
-        // });
-        // req.onres.status(status).send(data);
-    }
-};
+function getGoogleMapDirection(origin, destination){   
+    var status = 200;
+    var output = ''
+    var gmaps = null;
+    path_map = '/maps/api/directions/json?origin=' + origin + '&destination=' + destination + '&key=AIzaSyAKjk7jKmZbDIP0CEGZtMqw79h6MCabKJY&mode=walking'
+    var options = {
+          hostname: 'maps.googleapis.com',
+          path: path_map,
+          method: 'GET',
+          set_headers: {'Content-Type':'application/json'}
+        };
+    https.get(options, function(resp, err){
+        if(err) {
+          return err;
+        }
+        else{
+            resp.on('data', function(d){
+                // output += d.toString('utf8');
+                output += d.toString('utf8');
+
+                // console.log(json_obj);
+                gmaps = processGmap(output);
+                return gmaps;
+                // resp.send(output);
+            });
+        }
+    });
+    
+}
+        
