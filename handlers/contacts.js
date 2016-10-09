@@ -18,6 +18,7 @@ module.exports = {
          */
         var status = 200;
         var provider = dataProvider['get']['200'];
+        console.log(provider);
         provider(req, res, function (err, data) {
             if (err) {
                 next(err);

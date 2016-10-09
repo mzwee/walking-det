@@ -7,6 +7,8 @@ var Path = require('path');
 var Request = require('supertest');
 var Mockgen = require('../data/mockgen.js');
 var Parser = require('swagger-parser');
+var Promise = require('promise');
+
 /**
  * Test for /mapdirection
  */
