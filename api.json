@@ -108,6 +108,53 @@
                     }
                 }
             }
+        },
+				"/score": {
+            "get": {
+							"parameters": [
+                    {
+                        "name": "lat1",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "lon1",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "lat2",
+                        "in": "query",
+                        "type": "string"
+                    },
+                    {
+                        "name": "lon2",
+                        "in": "query",
+                        "type": "string"
+                    }
+              ],
+              "produces": [
+                  "application/json",
+                  "text/json"
+              ],
+              "responses": {
+                "200": {
+                  "description": "OK",
+									"schema": {
+										"required": [
+											"score"
+										],
+										"properties": {
+											"score": {
+												"type": "integer",
+												"format": "int32"
+											}
+										}
+									}
+                }
+              },
+              "deprecated": false
+            }
         }
     },
     "definitions": {
