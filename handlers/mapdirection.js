@@ -11,46 +11,35 @@ function processGmap(gmaps){
     console.log(gmaps);
 }
 
-// module.exports = {
-//     *
-//      * summary: 
-//      * description: 
-//      * parameters: origin, destination
-//      * produces: application/json, text/json
-//      * responses: 200
-     
-//     get: function mapdirections_get(req, res, next) {
-        /**
-         * Get the data for response 200
-         * For response `default` status 200 is used.
-         */
-function getGoogleMapDirection(origin, destination){   
-    var status = 200;
-    var output = ''
-    var gmaps = null;
-    path_map = '/maps/api/directions/json?origin=' + origin + '&destination=' + destination + '&key=AIzaSyAKjk7jKmZbDIP0CEGZtMqw79h6MCabKJY&mode=walking'
-    var options = {
-          hostname: 'maps.googleapis.com',
-          path: path_map,
-          method: 'GET',
-          set_headers: {'Content-Type':'application/json'}
-        };
-    https.get(options, function(resp, err){
-        if(err) {
-          return err;
-        }
-        else{
-            resp.on('data', function(d){
-                // output += d.toString('utf8');
-                output += d.toString('utf8');
+module.exports = {
+    getGoogleMapDirection:function(origin, destination){   
+        var status = 200;
+        var output = ''
+        var gmaps = null;
+        path_map = '/maps/api/directions/json?origin=' + origin + '&destination=' + destination + '&key=AIzaSyAKjk7jKmZbDIP0CEGZtMqw79h6MCabKJY&mode=walking'
+        var options = {
+              hostname: 'maps.googleapis.com',
+              path: path_map,
+              method: 'GET',
+              set_headers: {'Content-Type':'application/json'}
+            };
+        https.get(options, function(resp, err){
+            if(err) {
+              return err;
+            }
+            else{
+                resp.on('data', function(d){
+                    // output += d.toString('utf8');
+                    output += d.toString('utf8');
 
-                // console.log(json_obj);
-                gmaps = processGmap(output);
-                return gmaps;
-                // resp.send(output);
-            });
-        }
-    });
-    
+                    // console.log(json_obj);
+                    gmaps = processGmap(output);
+                    return gmaps;
+                    // resp.send(output);
+                });
+            }
+        });
+        
+    }
 }
         
