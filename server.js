@@ -12,9 +12,9 @@ var port = process.env.PORT || 8000,
 dotenv.load();
 
 var Storage = require('azure-storage'),
-    tableService = Storage.createTableService();
+    tableService = Storage.createTableService(),
+    safetyScore = require('./handlers/safetyscore');
     
-
 tableService.createTableIfNotExists('safetyTable', function(error, result, response) {
     if(error) {
         throw error;
