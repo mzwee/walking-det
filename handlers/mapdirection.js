@@ -18,10 +18,9 @@ module.exports = {
          */
         var status = 200;
         var provider = dataProvider['get']['200'];
-        console.log("WDHIUAWJDHPABFPA" + provider);
-        // console.log(provider.output_json);
-        var output = provider(req, res, function (err, data) {
-            console.log(data.statusCode);
+        provider(req, res, function (err, data) {
+            console.log(data);
+            console.log(data.responses);
             if (err) {
                 next(err);
                 return;

@@ -2,13 +2,13 @@
     "name": "walking-det",
     "description": "",
     "version": "1.0.0",
-    "author": "asd <asd>",
+    "author": "knazran <nazran@umich.edu>",
     "contributors": [],
     "repository": {
         "type": "git",
-        "url": "git://github.com/asd/walking-det.git"
+        "url": "git://github.com/knazran/walking-det.git"
     },
-    "bugs": "http://github.com/asd/walking-det/issues",
+    "bugs": "http://github.com/knazran/walking-det/issues",
     "publishConfig": {
         "registry": "https://registry.npmjs.org"
     },

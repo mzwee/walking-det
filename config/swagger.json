@@ -90,12 +90,12 @@
                 "deprecated": false
             }
         },
-        "/mapdirection/{id}": {
+        "/mapdirection/origin={origin}-destination={destination}": {
             "get": {
                 "tags": [
                     "MapDirection"
                 ],
-                "operationId": "mapdirection_getByID",
+                "operationId": "mapdirections_get",
                 "consumes": [],
                 "produces": [
                     "application/json",
@@ -103,11 +103,16 @@
                 ],
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "origin",
                         "in": "path",
                         "required": true,
-                        "type": "integer",
-                        "format": "int32"
+                        "type": "string"
+                    },
+                    {
+                        "name": "destination",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -145,8 +150,7 @@
             "type": "object",
             "properties": {
                 "id": {
-                    "format": "int32",
-                    "type": "integer"
+                    "type": "string"
                 },
                 "name": {
                     "type": "string"
