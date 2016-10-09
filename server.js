@@ -1,16 +1,26 @@
 'use strict';
-var port = process.env.PORT || 8000;
-var Http = require('http');
-var Express = require('express');
-var BodyParser = require('body-parser');
-var Swaggerize = require('swaggerize-express');
-var swaggerUi = require('swaggerize-ui');
-var Path = require('path');
-var twilio = require('twilio')
+var port = process.env.PORT || 8000,
+    Http = require('http'),
+    Express = require('express'),
+    BodyParser = require('body-parser'),
+    Swaggerize = require('swaggerize-express'),
+    swaggerUi = require('swaggerize-ui'),
+    Path = require('path'),
+    twilio = require('twilio'),
+    App = Express(),
+    Server = Http.createServer(App),
+    dotenv = require('dotenv');
+dotenv.load();
 
-var App = Express();
-
-var Server = Http.createServer(App);
+var Storage = require('azure-storage'),
+    tableService = Storage.createTableService(),
+    safetyScore = require('./handlers/safetyscore');
+    
+tableService.createTableIfNotExists('safetyTable', function(error, result, response) {
+    if(error) {
+        throw error;
+    }
+});
 
 App.use(BodyParser.json());
 App.use(BodyParser.urlencoded({
