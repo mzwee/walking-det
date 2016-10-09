@@ -20,17 +20,20 @@ module.exports = {
 
         var status = 200;
         var provider = dataProvider['get']['200'];
-        console.log("WDHIUAWJDHPABFPA" + provider);
-        // console.log(provider.output_json);
-        provider(req, function (err, data) {
-            var promise = new Promise(function (resolve, reject) {
-            if (err) reject(err);
-            else {
-                rez.status(status).send(data && data.statusCode);
-                resolve(res);
+        console.log(provider);
+        var promise = new Promise(function (resolve, reject) {
+        provider(req, rez, function (err, data) {
+            console.log(data);
+            if (err) {
+                reject(err);
+                return;
             }
-            });
-            return;
+                console.log(callback);
+                rez.status(status).send(data);
+                    resolve(res);
+                    return;
+                });
+            // return;
             // console.log("WDYWWYWYWYWYYWYWYWWYYW" +data)
         });
         // res.on('end', function () {

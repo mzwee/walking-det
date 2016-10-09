@@ -24,6 +24,8 @@ module.exports = {
                 next(err);
                 return;
             }
+            console.log(data);
+            console.log(data.responses);
             res.status(status).send(data && data.responses);
         });
     }
